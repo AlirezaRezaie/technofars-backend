@@ -1,4 +1,5 @@
-from rest_framework import generics
+from rest_framework import generics, permissions
+
 from .models import Blog, Category, Comment
 from .serializers import (
     BlogSerializer,
@@ -11,7 +12,6 @@ from django.shortcuts import get_object_or_404
 
 
 # *-------Blog views-------*
-# blog get all and create
 class BlogListView(generics.ListAPIView):
     queryset = Blog.objects.all().order_by("created_at")
     serializer_class = BaseBlogListSerializer
@@ -23,15 +23,18 @@ class BlogDetailView(generics.RetrieveAPIView):
 
 
 # blog get all and create
+# only admins can create or update blogs
 class BlogCreateView(generics.CreateAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogSerializer
+    permission_classes = [permissions.IsAdminUser]
 
 
 # blog update , delete, and get by id
 class BlogRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogSerializer
+    permission_classes = [permissions.IsAdminUser]
 
     def get_serializer_class(self):
         print(self.request.method)
@@ -45,11 +48,13 @@ class BlogRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
 class CategoryCreateView(generics.ListCreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    permission_classes = [permissions.IsAdminUser]
 
 
 class CategoryRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    permission_classes = [permissions.IsAdminUser]
 
 
 class CategoryGetBlogs(generics.ListAPIView):

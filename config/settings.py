@@ -12,7 +12,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+import dj_database_url
+import os
 
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -27,7 +31,6 @@ SECRET_KEY = "django-insecure-kptq9#sqrd@$qluyy8)^-e#57ylc%-34$u5b8pm(uv=5h2(tur
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -76,16 +79,19 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "technodb",
-        "USER": "technoadmin",
-        "PASSWORD": "admin1234",
-        "HOST": "localhost",  # or your host IP
-        "PORT": "5432",  # default PostgreSQL port
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "technodb",
+#         "USER": "technoadmin",
+#         "PASSWORD": "admin1234",
+#         "HOST": "localhost",  # or your host IP
+#         "PORT": "5432",  # default PostgreSQL port
+#     }
+# }
+
+DATABASES = {"default": dj_database_url.config(default=os.environ.get("DATABASE_URL"))}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -117,6 +123,7 @@ USE_I18N = True
 
 USE_TZ = True
 
+ALLOW_UNICODE_SLUGS = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/

@@ -8,6 +8,8 @@ class KeywordsInline(admin.TabularInline):
 
 class BlogAdmin(admin.ModelAdmin):
     inlines = (KeywordsInline,)
+    list_display = ("title", "slug")
+    prepopulated_fields = {"slug": ("title",)}
 
 
 # Register your models here.

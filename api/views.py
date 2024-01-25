@@ -20,6 +20,7 @@ class BlogListView(generics.ListAPIView):
 class BlogDetailView(generics.RetrieveAPIView):
     queryset = Blog.objects.all()
     serializer_class = BlogDetailSerializer
+    lookup_field = "slug"  # Specify the lookup field as 'slug'
 
 
 # blog get all and create

@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 import os
-from django.contrib.postgres.fields import ArrayField
 
 
 class Category(models.Model):
@@ -21,6 +20,7 @@ class Blog(models.Model):
     time_to_read = models.IntegerField("زمان خواندن")
     image = models.ImageField(upload_to="blog_images/", blank=True, null=True)
     categories = models.ManyToManyField(Category, related_name="blogs")
+    slug = models.SlugField(unique=True, max_length=150, blank=True, allow_unicode=True)
 
     def save(self, *args, **kwargs):
         try:

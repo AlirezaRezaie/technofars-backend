@@ -9,10 +9,11 @@ from .views import (
     CategoryRetrieveUpdateDestroyView,
     CommentListCreateView,
 )
+from django.urls import path, re_path
 
 urlpatterns = [
     path("", BlogListView.as_view(), name="blog-crud"),
-    path("<int:pk>/", BlogDetailView.as_view(), name="blog-crud"),
+    re_path(r"(?P<slug>[^/]+)/?$", BlogDetailView.as_view(), name="blog-crud"),
     path("update/<int:pk>/", BlogRetrieveUpdateDestroyView.as_view()),
     path("create/", BlogCreateView.as_view(), name="blog-crud"),
     path("comment/", CommentListCreateView.as_view()),

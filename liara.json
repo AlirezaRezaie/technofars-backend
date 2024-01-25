@@ -1,0 +1,16 @@
+{
+    "platform": "django",
+    "app": "technofars-backend",
+    "port": 8000,
+  
+    "disks": [
+      {
+        "name": "technofars-disk",
+        "mountTo": "media"
+      }
+    ],
+    
+    "django": {
+      "pythonVersion": "3.11"
+    }
+}

@@ -3,19 +3,29 @@ from jdatetime import datetime as jdatetime
 
 from .models import Blog, Category, Comment
 
+
 # Convert Unix time to Persian date
 
 
 class BaseBlogListSerializer(serializers.ModelSerializer):
     author = serializers.SerializerMethodField()
-    author_profile = serializers.SerializerMethodField()
+    # author_profile = serializers.SerializerMethodField()
     categories = serializers.SerializerMethodField()
     created_at = serializers.SerializerMethodField()  # New field for Persian date
+    keyword = serializers.SerializerMethodField()  # New field for Persian date
+
     # ... (your existing code)
 
     class Meta:
         model = Blog
         fields = "__all__"  # Include the new field
+
+    def get_keyword(self, obj):
+        # "برنامه نویسی, پایتون, برنامه"
+        # for meta frontend metatags
+        all_keywords = [keyword.name for keyword in obj.keyword.all()]
+        all_keywords = ", ".join(all_keywords)
+        return all_keywords
 
     def get_categories(self, obj):
         return [category.name for category in obj.categories.all()]
@@ -25,13 +35,13 @@ class BaseBlogListSerializer(serializers.ModelSerializer):
             return f"{obj.author.first_name} {obj.author.last_name}"
         return None
 
-    def get_author_profile(self, obj):
-        if obj.author.profile_image:
-            profile_image_url = self.context["request"].build_absolute_uri(
-                obj.author.profile_image.url
-            )
-            return profile_image_url
-        return None
+    # def get_author_profile(self, obj):
+    #     if obj.author.profile_image:
+    #         profile_image_url = self.context["request"].build_absolute_uri(
+    #             obj.author.profile_image.url
+    #         )
+    #         return profile_image_url
+    #     return None
 
     def get_created_at(self, obj):
         # Assuming created_at is a DateTimeField in your model

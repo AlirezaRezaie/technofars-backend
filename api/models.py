@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 import os
+from django.contrib.postgres.fields import ArrayField
 
 
 class Category(models.Model):
@@ -11,7 +12,6 @@ class Category(models.Model):
         return str(self.name)
 
 
-# Create your models here.
 class Blog(models.Model):
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=450, null=True)
@@ -41,6 +41,18 @@ class Blog(models.Model):
 
     def __str__(self):
         return str(self.title)
+
+
+class Keyword(models.Model):
+    name = models.CharField("کلید واژه", blank=False, null=False)
+    blog = models.ForeignKey(
+        Blog,
+        verbose_name="کلید واژه ها",
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name="keyword",
+    )
 
 
 class Comment(models.Model):

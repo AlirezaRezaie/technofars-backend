@@ -44,7 +44,7 @@ class Blog(models.Model):
 
 
 class Keyword(models.Model):
-    name = models.CharField("کلید واژه", blank=False, null=False)
+    name = models.CharField("کلید واژه", max_length=100, blank=False, null=False)
     blog = models.ForeignKey(
         Blog,
         verbose_name="کلید واژه ها",

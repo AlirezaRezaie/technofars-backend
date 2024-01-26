@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "api",
     "rest_framework",
+    "ckeditor",
 ]
 
 MIDDLEWARE = [
@@ -100,6 +101,13 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
 
+CKEDITOR_CONFIGS = {
+    "default": {
+        "toolbar": "full",
+        "height": 300,
+        "width": 800,
+    },
+}
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 

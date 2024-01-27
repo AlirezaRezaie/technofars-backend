@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from account.models import Person
 import os
 
 
@@ -15,7 +15,7 @@ class Blog(models.Model):
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=450, null=True)
     content = models.TextField()
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(Person, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     time_to_read = models.IntegerField("زمان خواندن")
     image = models.ImageField(upload_to="blog_images/", blank=True, null=True)

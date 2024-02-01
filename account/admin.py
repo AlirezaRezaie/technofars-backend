@@ -4,7 +4,12 @@ from django.db import models
 
 from ckeditor.widgets import CKEditorWidget
 
-from .models import Person, Role
+from .models import Person, Role, Contact
+
+
+class ContactInfoInline(admin.StackedInline):
+    model = Contact
+    extra = 0  # To prevent displaying extra empty forms
 
 
 # Register your models here.
@@ -25,7 +30,14 @@ class PersonAdmin(UserAdmin):
         (None, {"fields": ("email", "password")}),
         (
             ("Personal info"),
-            {"fields": ("first_name", "last_name", "profile_image", "about_me")},
+            {
+                "fields": (
+                    "first_name",
+                    "last_name",
+                    "profile_image",
+                    "about_me",
+                )
+            },
         ),
         (("Permissions"), {"fields": ("is_active", "is_staff", "role")}),
         (("Important dates"), {"fields": ("last_login",)}),
@@ -44,6 +56,8 @@ class PersonAdmin(UserAdmin):
     formfield_overrides = {
         models.TextField: {"widget": CKEditorWidget},
     }
+
+    inlines = [ContactInfoInline]
 
 
 admin.site.register(Person, PersonAdmin)

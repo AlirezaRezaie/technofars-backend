@@ -44,7 +44,7 @@ class PersonManager(BaseUserManager):
 
 class Role(models.Model):
     DEFAULT_ROLE = "admin"
-    name = models.CharField(max_length=20, unique=True, default=DEFAULT_ROLE)
+    name = models.CharField(max_length=100, unique=True, default=DEFAULT_ROLE)
 
     def __str__(self):
         return str(self.name)
@@ -80,3 +80,20 @@ class Person(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return str(self.first_name) + str(self.last_name)
+
+
+class Contact(models.Model):
+    contact_info = models.OneToOneField(
+        Person,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        related_name="contact",
+    )
+    telegram = models.CharField(max_length=50, blank=True, null=True)
+    instagram = models.CharField(max_length=50, blank=True, null=True)
+    linkedin = models.CharField(max_length=50, blank=True, null=True)
+    phone_number = models.CharField(max_length=20, blank=True, null=True)
+
+    def __str__(self):
+        return "Contact Info"

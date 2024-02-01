@@ -9,6 +9,25 @@ class ContactSerializer(serializers.ModelSerializer):
         exclude = ("id", "contact_info")
 
 
+class PersonProfileSerializer(serializers.ModelSerializer):
+    role = serializers.SerializerMethodField()
+
+    def get_role(self, obj):
+        if obj.role:
+            return obj.role.name
+        else:
+            return None
+
+    class Meta:
+        model = Person
+        fields = (
+            "first_name",
+            "last_name",
+            "profile_image",
+            "role",
+        )
+
+
 class PersonListSerializer(serializers.ModelSerializer):
     role = serializers.SerializerMethodField()
     contact = serializers.SerializerMethodField()

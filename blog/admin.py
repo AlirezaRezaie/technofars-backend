@@ -17,6 +17,5 @@ class BlogAdmin(admin.ModelAdmin):
     }
 
 
-# Register your models here.
 admin.site.register(Blog, BlogAdmin)
 admin.site.register(Category)

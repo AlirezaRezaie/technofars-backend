@@ -79,7 +79,7 @@ class Person(AbstractBaseUser, PermissionsMixin):
     objects = PersonManager()
 
     def __str__(self):
-        return str(self.first_name) + str(self.last_name)
+        return f"{self.first_name} {self.last_name}"
 
 
 class Contact(models.Model):

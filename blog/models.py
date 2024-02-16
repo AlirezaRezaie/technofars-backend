@@ -18,7 +18,7 @@ class Blog(models.Model):
     author = models.ForeignKey(Person, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     time_to_read = models.IntegerField("زمان خواندن")
-    image = models.ImageField(upload_to="blog_images/", blank=True, null=True)
+    image = models.ImageField(upload_to="blog_images/", blank=False, null=True)
     categories = models.ManyToManyField(Category, related_name="blogs")
     slug = models.SlugField(unique=True, max_length=150, blank=True, allow_unicode=True)
 

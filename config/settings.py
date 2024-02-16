@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "account",
     "blog",
     "project",
+    "util",
     "rest_framework",
     "ckeditor",
 ]
@@ -103,12 +104,14 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
 
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
+CKEDITOR_UPLOAD_PATH = "media/uploads/"
 CKEDITOR_CONFIGS = {
     "default": {
         "toolbar": "full",
-        "height": 300,
-        "width": 800,
-    },
+        "removePlugins": "exportpdf",
+        "extraPlugins": ",".join(["html5video"]),
+    }
 }
 
 AUTH_USER_MODEL = "account.Person"
@@ -148,12 +151,14 @@ ALLOW_UNICODE_SLUGS = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+
 STATIC_URL = "static/"
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "media")]
+STATIC_ROOT = os.path.join(BASE_DIR, "media/staticfiles")
+
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "media")]
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 

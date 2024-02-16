@@ -70,7 +70,7 @@ class Person(AbstractBaseUser, PermissionsMixin):
         default="profiles/dummy-profile.png",
     )
 
-    about_me = models.TextField("درباره من")
+    about_me = models.TextField("درباره من", blank=True, null=True)
     role = models.ForeignKey(Role, on_delete=models.PROTECT, default=1)
 
     USERNAME_FIELD = "email"

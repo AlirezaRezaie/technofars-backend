@@ -2,13 +2,13 @@ from rest_framework import serializers
 from jdatetime import datetime as jdatetime
 
 from .models import Blog, Category, Comment
-from account.serializers import PersonProfileSerializer
+from account.serializers import PersonProfileSerializer, PersonListSerializer
 
 # Convert Unix time to Persian date
 
 
 class BlogDetailSerializer(serializers.ModelSerializer):
-    author = PersonProfileSerializer(many=False)
+    author = PersonListSerializer(many=False)
     author_profile = serializers.SerializerMethodField()
     categories = serializers.SerializerMethodField()
     created_at = serializers.SerializerMethodField()  # New field for Persian date
@@ -62,10 +62,22 @@ class BlogDetailSerializer(serializers.ModelSerializer):
 
 class BlogListSerializer(serializers.ModelSerializer):
     author = PersonProfileSerializer(many=False)
+    categories = serializers.SerializerMethodField()
+
+    def get_categories(self, obj):
+        return [category.name for category in obj.categories.all()]
 
     class Meta:
         model = Blog
-        fields = ("title", "description", "image", "author", "slug")
+        fields = (
+            "title",
+            "description",
+            "image",
+            "author",
+            "categories",
+            "slug",
+            "created_at",
+        )
 
 
 class CategorySerializer(serializers.ModelSerializer):

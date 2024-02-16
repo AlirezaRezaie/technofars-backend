@@ -1,16 +1,23 @@
 from rest_framework import serializers
-from .models import Project
-from account.serializers import PersonProfileSerializer
+from .models import Project, ProjectImage
+from account.serializers import PersonListSerializer
+
+
+class ProjectImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProjectImage
+        fields = ("url",)
 
 
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
-        fields = ("title", "thumbnail", "slug")
+        fields = ("title", "thumbnail", "slug", "created_at")
 
 
 class ProjectDetailSerializer(serializers.ModelSerializer):
-    creators = PersonProfileSerializer(many=True)
+    creators = PersonListSerializer(many=True)
+    images = ProjectImageSerializer(many=True, read_only=True)
 
     class Meta:
         model = Project

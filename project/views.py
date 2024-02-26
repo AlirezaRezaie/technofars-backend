@@ -14,3 +14,11 @@ class ProjectDetailView(generics.RetrieveAPIView):
     queryset = Project.objects.all()
     serializer_class = ProjectDetailSerializer
     lookup_field = "slug"
+
+
+class ProjectTypeView(generics.ListAPIView):
+    serializer_class = ProjectSerializer
+
+    def get_queryset(self):
+        type_name = self.kwargs["type_name"]
+        return Project.objects.filter(project_type=type_name)

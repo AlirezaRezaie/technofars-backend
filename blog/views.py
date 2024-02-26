@@ -12,7 +12,7 @@ from django.shortcuts import get_object_or_404
 
 # *-------Blog views-------*
 class BlogListView(generics.ListAPIView):
-    queryset = Blog.objects.all().order_by("created_at")
+    queryset = Blog.objects.all().order_by("-created_at")
     serializer_class = BlogListSerializer
 
 

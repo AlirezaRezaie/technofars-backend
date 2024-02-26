@@ -5,19 +5,16 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    initial = True
-
     dependencies = [
+        ('project', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='ContactUs',
+            name='ProjectSubject',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(verbose_name='موضوع پیام')),
-                ('email', models.EmailField(max_length=254, verbose_name='ایمیل فرستنده')),
-                ('body', models.TextField(verbose_name='متن پیام')),
+                ('name', models.CharField(max_length=100, verbose_name='موضوع پروژه')),
             ],
         ),
     ]

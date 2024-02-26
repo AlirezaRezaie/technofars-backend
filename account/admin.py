@@ -35,7 +35,10 @@ class PersonAdmin(UserAdmin):
                     "first_name",
                     "last_name",
                     "profile_image",
+                    "biography",
                     "about_me",
+                    "skills",
+                    "slug",
                 )
             },
         ),
@@ -52,6 +55,8 @@ class PersonAdmin(UserAdmin):
             },
         ),
     )
+
+    # prepopulated_fields = {"slug": ("title",)}
 
     formfield_overrides = {
         models.TextField: {"widget": CKEditorWidget},

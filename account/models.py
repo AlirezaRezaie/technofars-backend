@@ -6,6 +6,14 @@ from django.contrib.auth.models import (
 )
 
 
+class Technology(models.Model):
+    name = models.CharField("نام تکنولوژی", blank=False, null=False)
+    icon = models.ImageField(upload_to="technoloy_icon/", blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
 class PersonManager(BaseUserManager):
     """
     cusotmized mangager for CustomUser
@@ -70,8 +78,11 @@ class Person(AbstractBaseUser, PermissionsMixin):
         default="profiles/dummy-profile.png",
     )
 
-    about_me = models.TextField("درباره من")
+    about_me = models.CharField("درباره من", max_length=100, unique=True, null=True)
+    biography = models.TextField("بیوگرافی")
+    skills = models.ManyToManyField(Technology)
     role = models.ForeignKey(Role, on_delete=models.PROTECT, default=1)
+    slug = models.SlugField(unique=True, max_length=50, null=True, blank=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []

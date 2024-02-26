@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "blog",
     "project",
     "util",
+    "podcast",
     "rest_framework",
     "ckeditor",
 ]

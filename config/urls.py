@@ -9,6 +9,7 @@ urlpatterns = [
     path("project/", include("project.urls")),
     path("person/", include("account.urls")),
     path("utils/", include("util.urls")),
+    path("podcast/", include("podcast.urls")),
 ]
 
 # Add the following line to serve media files during development

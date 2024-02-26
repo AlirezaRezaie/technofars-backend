@@ -14,7 +14,9 @@ class Podcast(models.Model):
 
     hosts = models.ManyToManyField(Person)
 
-    file = models.FileField(upload_to="podcasts/audio")
+    file = models.URLField(
+        "لینک پادکست", max_length=128, db_index=True, unique=True, blank=True
+    )
     thumbnail = models.ImageField(upload_to="podcasts/images/", blank=True, null=True)
 
     def __str__(self) -> str:

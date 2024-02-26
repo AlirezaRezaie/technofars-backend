@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db import models
 from ckeditor.widgets import CKEditorWidget
-from .models import Project, ProjectImage
+from .models import Project, ProjectSubject, ProjectGroup, Technology, ProjectImage
 
 
 class ProjectImageInline(admin.TabularInline):
@@ -18,3 +18,6 @@ class ProjectAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Project, ProjectAdmin)
+admin.site.register(Technology)
+admin.site.register(ProjectSubject)
+admin.site.register(ProjectGroup)

@@ -78,9 +78,9 @@ class Person(AbstractBaseUser, PermissionsMixin):
         default="profiles/dummy-profile.png",
     )
 
-    about_me = models.CharField("درباره من", max_length=100, unique=True, null=True)
     biography = models.TextField("بیوگرافی")
     skills = models.ManyToManyField(Technology)
+    about_me = models.TextField("درباره من", blank=True, null=True)
     role = models.ForeignKey(Role, on_delete=models.PROTECT, default=1)
     slug = models.SlugField(unique=True, max_length=50, null=True, blank=True)
 

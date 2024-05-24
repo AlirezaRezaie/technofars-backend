@@ -6,7 +6,7 @@ from .serializers import PodcastSerializer, PodcastDetailSerializer
 
 # *-------podcast views-------*
 class PodcastListView(generics.ListAPIView):
-    queryset = Podcast.objects.all()
+    queryset = Podcast.objects.all().order_by("-created_at")
     serializer_class = PodcastSerializer
 
 

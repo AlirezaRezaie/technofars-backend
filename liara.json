@@ -2,7 +2,9 @@
     "platform": "django",
     "app": "technofars-backend",
     "port": 8000,
-  
+    "build": {
+      "location": "germany"
+    },
     "disks": [
       {
         "name": "technofars-disk",
@@ -15,6 +17,7 @@
     ],
     
     "django": {
-      "pythonVersion": "3.11"
+      "pythonVersion": "3.11",
+      "mirror": false
     }
 }

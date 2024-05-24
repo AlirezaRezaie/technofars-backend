@@ -6,7 +6,7 @@ from .serializers import ProjectSerializer, ProjectDetailSerializer
 
 # *-------Project views-------*
 class ProjectListView(generics.ListAPIView):
-    queryset = Project.objects.all()
+    queryset = Project.objects.all().order_by("-created_at")
     serializer_class = ProjectSerializer
 
 
@@ -21,4 +21,4 @@ class ProjectTypeView(generics.ListAPIView):
 
     def get_queryset(self):
         type_name = self.kwargs["type_name"]
-        return Project.objects.filter(project_type=type_name)
+        return Project.objects.filter(project_type=type_name).order_by("-created_at")

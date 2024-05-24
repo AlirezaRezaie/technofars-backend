@@ -42,7 +42,7 @@ class PersonAdmin(UserAdmin):
                 )
             },
         ),
-        (("Permissions"), {"fields": ("is_active", "is_staff", "role")}),
+        (("Permissions"), {"fields": ("is_active", "is_staff", "role", "groups")}),
         (("Important dates"), {"fields": ("last_login",)}),
     )
 

@@ -8,7 +8,7 @@ class Podcast(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     description = models.CharField(
-        "درباره پادکست", max_length=50, null=True, blank=False
+        "درباره پادکست", max_length=250, null=True, blank=False
     )
     content = models.TextField("توضیحات")
 

@@ -19,7 +19,7 @@ import locale
 
 load_dotenv()
 
-locale.setlocale(locale.LC_ALL, "fa_IR.UTF-8")
+# locale.setlocale(locale.LC_ALL, "fa_IR.UTF-8")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -101,13 +101,21 @@ WSGI_APPLICATION = "config.wsgi.application"
 #     }
 # }
 
-DATABASES = {"default": dj_database_url.config(default=os.environ.get("DATABASE_URL"))}
+# DATABASES = {"default": dj_database_url.config(default=os.environ.get("DATABASE_URL"))}
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "ariascode_bkss",
+        "USER": "ariasprosa",
+        "PASSWORD": "0CSw%KdihSZ2oJ3x0Ht7",
+        "HOST": "localhost",
+        "PORT": "5432",
+    }
+}
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-]
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "https://ariascode.ir"]
 
 AUTH_USER_MODEL = "account.Person"
 
@@ -145,7 +153,6 @@ ALLOW_UNICODE_SLUGS = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-
 
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "static")

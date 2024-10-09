@@ -109,16 +109,6 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
 
-CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
-CKEDITOR_UPLOAD_PATH = "media/uploads/"
-CKEDITOR_CONFIGS = {
-    "default": {
-        "toolbar": "full",
-        "removePlugins": "exportpdf",
-        "extraPlugins": ",".join(["html5video"]),
-    }
-}
-
 AUTH_USER_MODEL = "account.Person"
 
 # Password validation
@@ -157,13 +147,23 @@ ALLOW_UNICODE_SLUGS = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 
-STATIC_URL = "static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "media")]
-STATIC_ROOT = os.path.join(BASE_DIR, "media/staticfiles")
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
+
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
+CKEDITOR_UPLOAD_PATH = "media/uploads/"
+CKEDITOR_CONFIGS = {
+    "default": {
+        "toolbar": "full",
+        "removePlugins": "exportpdf",
+        "extraPlugins": ",".join(["html5video"]),
+        "uploadUrl": f"{MEDIA_URL}ckeditor_upload/",
+    }
+}
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
